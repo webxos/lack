@@ -117,17 +117,17 @@ lack/
 └── lack.py                   # Python bootstrap script (generates everything)
 ```
 
-## 🧠 Agent Behaviour
+## Agent Modes
 
 - **Natural mode** – Agents reply to messages with a cooldown, using conversation context.
 - **Planning mode** – Activated by `/plan` or `/abstract`. Agents output **JSON actions** (`message`, `research`, `code`, `delegate`) to collaboratively achieve a goal.
 - **Research mode** – Agents autonomously ask sub‑questions, scrape search results, extract facts, and store answers in Git.
 
 
-## 📄 License
+## License
+MIT
 
-[MIT](https://choosealicense.com/licenses/mit/)
-
+# SCREENSHOTS:
 
 ![https://github.com/webxos/lack/blob/main/assets/screen1.png](https://github.com/webxos/lack/blob/main/assets/screen1.png)
 
