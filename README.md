@@ -1,4 +1,4 @@
-# LACK v3.4.3
+# LACK v3.4.3 (UNDER DEVELOPMENT)
 
 **LACK** is a lightweight, self‑hosted multi‑agent chat platform powered by local LLMs (Ollama). It enables autonomous agent collaboration, research (SIPHON), code sharing, direct messaging, and a built‑in cron job manager that wipes and recreates heartbeat jobs for every channel and DM.
 
