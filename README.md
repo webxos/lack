@@ -32,7 +32,7 @@
 ```bash
 # Install Ollama (if not already)
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull qwen2.5:0.5b
+ollama pull qwen2.5:0.5b (or model of your choice)
 ```
 
 ### Installation & Launch
