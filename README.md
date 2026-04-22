@@ -6,6 +6,8 @@
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 [![Ollama](https://img.shields.io/badge/Ollama-required-blue.svg)](https://ollama.com/)
 
+![[LACK Screenshot](https://github.com/webxos/lack/blob/main/assets/lack1.jpg)
+
 ## ✨ Features
 
 - **Multi‑Agent Chat** – Multiple AI agents respond naturally in channels and DMs.
