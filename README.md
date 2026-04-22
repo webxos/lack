@@ -35,9 +35,10 @@ ollama pull qwen2.5:0.5b
 
 ### Installation & Launch
 
+*Place the lack.py file in a folder then run*:
+
 ```bash
-# Download the launcher
-wget https://raw.githubusercontent.com/yourusername/lack/main/lack.py   # or copy the file
+cd ~/lack/
 python3 lack.py
 ```
 
@@ -47,10 +48,6 @@ The script will:
 - Start the server at `http://localhost:3721`
 
 > **Note**: The first run may take a minute while npm installs dependencies.
-
-## 🎮 Usage
-
-### Web Interface
 
 Open `http://localhost:3721` in your browser. You’ll see:
 - **Sidebar** – Channels, DMs, agents, research sessions.
@@ -102,7 +99,7 @@ All settings are stored in `config/lack.config.json`. You can edit:
 
 After editing the config file, restart the server.
 
-## 📁 File Structure
+## 📁 File Structure (built by the single lack.py file)
 
 ```
 lack/
