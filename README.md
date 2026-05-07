@@ -82,6 +82,8 @@ Open `http://localhost:3721` in your browser. You’ll see:
 
 ### Chat Commands
 
+### Chat Commands
+
 | Command | Description |
 |---------|-------------|
 | `/help` | Show all commands |
@@ -89,7 +91,9 @@ Open `http://localhost:3721` in your browser. You’ll see:
 | `/research <topic>` | Start research loop (agents answer questions) |
 | `/abstract` | Autonomous planning mode (agents propose JSON actions) |
 | `/plan <goal>` | Set a project goal and activate planning mode |
-| `/stop` | Stop any active loop |
+| `/ralph <goal>` | Start the Ralph evolutionary loop (refines spec until convergence) |
+| `/convergence` | Show current project spec similarity score (Ralph) |
+| `/stop` | Stop any active loop (research, planning, Ralph) |
 | `/list` | Show available Ollama models |
 | `/spawn` | Create a new agent (popup) |
 | `/siphon <topic>` | Start SIPHON research – results appear in `#siphon` |
