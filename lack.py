@@ -2399,7 +2399,7 @@ def open_browser():
     webbrowser.open('http://localhost:3721')
 
 def main():
-    print("=== LACK v3.17.0 – Final Production Fix ===")
+    print("=== LACK v3.5.0 – Final Production Fix ===")
     create_directory("config")
     create_directory("public")
     create_directory("bin")
@@ -2444,7 +2444,7 @@ def main():
         print(f"⚠ Ollama not running or error: {e}. Agents will fail to respond.")
 
     threading.Thread(target=open_browser, daemon=True).start()
-    print("\nStarting LACK v3.17.0 – Production Ready:")
+    print("\nStarting LACK v3.5.0 – Production Ready:")
     print(" - Fixed extractJSON hoisting")
     print(" - Per-store projectState (no more corruption)")
     print(" - Ralph loop cancellation and convergence fixed")
