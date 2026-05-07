@@ -101,6 +101,23 @@ Open `http://localhost:3721` in your browser. You’ll see:
 | `/graph` | Open resource graph modal |
 | `/errorlog` | Show recent Ollama errors |
 
+### 🧬 Ralph Evolutionary Loop
+
+Ralph is an autonomous specification refinement engine.
+When you run /ralph <goal> in any channel or DM:
+
+- **Ralph generates a project spec (title, goals, nextSteps, completedTasks, memory).**
+
+- **Every 5 seconds, a different agent evaluates the current spec and evolves it.**
+
+- **The loop stops when similarity ≥ 0.95 (convergence) or after 30 generations.**
+
+- **All iterations are stored in the lineage/ folder (JSONL files).**
+
+- **Use /convergence to check the current similarity score.**
+
+Ralph works in both channels and DMs, and respects participant‑restricted agents.
+
 ### 💣 Cron Management
 
 Click the **red "💣 CRON"** button in the top bar. A warning popup asks for confirmation. After confirmation:
@@ -114,6 +131,20 @@ This gives you a clean slate and ensures every conversation thread has a heartbe
 
 > ⚠️ **Warning**: This action is irreversible. It removes **all** cron jobs for the user running the LACK server.
 
+### 📡 SIPHON Research
+
+SIPHON turns your agents into autonomous researchers:
+
+- **/siphon <topic> starts a research session.**
+
+- **Agents generate sub‑questions, scrape DuckDuckGo results, extract facts, and produce answers.**
+
+- **Progress is streamed to the #siphon channel.**
+
+- **Results are stored in the research/ Git repository (auto‑committed).**
+
+- **Use /pull <sessionId> to bring key insights into any channel.**
+
 ## 🛠 Configuration
 
 All settings are stored in `config/lack.config.json`. You can edit:
@@ -125,33 +156,37 @@ All settings are stored in `config/lack.config.json`. You can edit:
 
 After editing the config file, restart the server.
 
-## 📁 File Structure (built by the single lack.py file)
+### 📁 File Structure (built by the single lack.py file)
 
 ```
 lack/
+├── lack.py                   # Python bootstrap script (the only file you need)
 ├── server.js                 # Main Node.js server
 ├── package.json              # Dependencies
 ├── bin/lack.js               # CLI launcher
 ├── public/
-│   ├── index.html            # Web UI
-│   └── client.js             # Frontend WebSocket logic
+│   ├── index.html            # Web UI (responsive)
+│   └── client.js             # (embedded in index.html)
 ├── config/
 │   └── lack.config.json      # Configuration
-├── research/                 # Git repo for SIPHON artifacts
-└── lack.py                   # Python bootstrap script (generates everything)
+├── logs/
+│   └── error.log             # Ollama & system errors
+├── lineage/                  # JSONL event logs for each store (channel/DM)
+├── research/                 # Git repository for SIPHON artifacts
+└── node_modules/             # npm dependencies
 ```
 
-## Agent Modes
+### 🤖 Agent Modes
+Mode	Trigger	Behaviour
+Natural	Normal messages	Agents reply with cooldown, using conversation context.
+Planning	/plan or /abstract	Agents output JSON actions (message, research, code, delegate).
+Research	/research	Agents ask sub‑questions, scrape answers, and iterate.
+Ralph	/ralph <goal>	Agents evolve a project specification until convergence.
 
-- **Natural mode** – Agents reply to messages with a cooldown, using conversation context.
-- **Planning mode** – Activated by `/plan` or `/abstract`. Agents output **JSON actions** (`message`, `research`, `code`, `delegate`) to collaboratively achieve a goal.
-- **Research mode** – Agents autonomously ask sub‑questions, scrape search results, extract facts, and store answers in Git.
-
-
-## License
+### License
 MIT
 
-# SCREENSHOTS:
+### SCREENSHOTS:
 
 ![https://github.com/webxos/lack/blob/main/assets/screen1.png](https://github.com/webxos/lack/blob/main/assets/screen1.png)
 
