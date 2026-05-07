@@ -2362,7 +2362,7 @@ async function checkOllama() {
   });
 }
 async function main() {
-  console.log('\\x1b[36m[ LACK v3.17.0 ] Starting – production ready\\x1b[0m');
+  console.log('\\x1b[36m[ LACK v3.5.0 ] Starting – production ready\\x1b[0m');
   if (!await checkOllama()) { console.error('\\x1b[31m✗ Ollama not running\\x1b[0m'); process.exit(1); }
   console.log('\\x1b[32m✓ Ollama detected\\x1b[0m');
   const server = spawn('node', ['server.js'], { stdio: 'inherit', cwd: projectRoot });
