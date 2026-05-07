@@ -177,11 +177,14 @@ lack/
 ```
 
 ### 🤖 Agent Modes
-Mode	Trigger	Behaviour
-Natural	Normal messages	Agents reply with cooldown, using conversation context.
-Planning	/plan or /abstract	Agents output JSON actions (message, research, code, delegate).
-Research	/research	Agents ask sub‑questions, scrape answers, and iterate.
-Ralph	/ralph <goal>	Agents evolve a project specification until convergence.
+
+- **Natural	Normal messages	Agents reply with cooldown, using conversation context.**
+  
+- **Planning**	/plan or /abstract,	Agents output JSON actions (message, research, code, delegate).
+  
+- **Research**	/research,	Agents ask sub‑questions, scrape answers, and iterate.
+  
+- **Ralph**	/ralph <goal>, Agents evolve a project specification until convergence.
 
 ### License
 MIT
