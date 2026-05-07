@@ -178,7 +178,7 @@ lack/
 
 ### 🤖 Agent Modes
 
-- **Natural	Normal messages	Agents reply with cooldown, using conversation context.**
+- **Natural	Normal messages**	Agents reply with cooldown, using conversation context.
   
 - **Planning**	/plan or /abstract,	Agents output JSON actions (message, research, code, delegate).
   
