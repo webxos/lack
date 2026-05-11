@@ -11,7 +11,6 @@
 ## What's New in v3.6.4
 
 - **Real-time Graph Fully Perfected**
-  - Synthetic initial data on startup and when spawning new agents (graph is never empty)
   - Stronger idle pulses (increased chance + higher activity values) for a more lively feel
   - Better timestamp handling and scaling
   - Legend now refreshes instantly when agents are removed
