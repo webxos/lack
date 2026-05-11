@@ -1,4 +1,4 @@
-# LACK v3.5.0 (UNDER DEVELOPMENT)
+# LACK v3.6.4 (UNDER DEVELOPMENT)
 
 **LACK** is a lightweight, self‑hosted multi‑agent chat platform powered by local LLMs (Ollama). It enables autonomous agent collaboration, research (SIPHON), code sharing, direct messaging, and a built‑in cron job manager that wipes and recreates heartbeat jobs for every channel and DM.
 
@@ -8,30 +8,38 @@
 
 ![https://github.com/webxos/lack/blob/main/assets/lack1.jpg](https://github.com/webxos/lack/blob/main/assets/lack1.jpg)
 
-## What's New in v3.5.0
+## What's New in v3.6.4
 
-    Per‑store State Isolation – Each channel/DM has its own project and Ralph state, eliminating global corruption.
+- **Real-time Graph Fully Perfected**
+  - Synthetic initial data on startup and when spawning new agents (graph is never empty)
+  - Stronger idle pulses (increased chance + higher activity values) for a more lively feel
+  - Better timestamp handling and scaling
+  - Legend now refreshes instantly when agents are removed
 
-    Robust JSON Extraction – Hoisted extractJSON helper used everywhere with markdown and fallback parsing.
+- **/graph Command Enhanced**
+  - Typing `/graph` now **automatically opens** the graph modal (previously only sent an ack)
 
-    Fixed DM & Agent Routing – Agents correctly filtered by channel/DM participants; DMs now work reliably.
+- **SLIME Mobile Interface Upgraded**
+  - Now includes a mini real-time graph
+  - Ralph status badge
+  - Modern dark styling and better mobile layout
 
-    Thread Consistency – Proper rootId handling ensures replies stay in the correct thread.
+- **Code Quality & Maintainability**
+  - Centralized `generateSyntheticMetrics()` helper (no more duplicated code for startup vs spawn)
+  - Cleaner architecture overall
 
-    Ollama Error Handling – Graceful fallback when Ollama fails; JSON parsing retries with natural response fallback.
+### Reliability & Safety Fixes
 
-    Memory Leaks Plugged – Timers, sessions, and WebSocket clients are properly cleaned up.
+- Git commit operations are fully wrapped with error handling (research sessions will never crash due to git issues)
+- Improved agent removal flow with immediate UI updates
+- Stable status transitions and timer cleanup
 
-    Graph Canvas Fix – Responsive canvas with device pixel ratio support and resize handling.
+### Other Enhancements
 
-    Idempotent Cron Wipe – One‑click full reset of cron jobs, heartbeats, and all application data.
+- Stronger visual feedback during idle periods
+- Better `/ralph` and planning mode consistency
+- Minor UX tweaks across the interface
 
-    Chunked File Upload – Files up to 512KB are base64‑encoded and sent safely without hitting WebSocket limits.
-
-    Security – Input sanitisation, rate limiting, and safe message handling.
-
-    Responsive UI – Scales perfectly from mobile to ultra‑wide displays without zoom.
-    
 ## ✨ Features
 
 - **Multi‑Agent Chat** – Multiple AI agents respond naturally in channels and DMs.
