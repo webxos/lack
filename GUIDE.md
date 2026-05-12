@@ -1,4 +1,4 @@
-# LACK Agent Modes – Complete Explanation
+# LACK Guide v1.0
 
 Agents in LACK operate in **different behavioral modes** depending on the channel state and commands you issue. Each mode changes how agents generate responses and what actions they can take.
 
