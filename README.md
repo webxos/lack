@@ -8,36 +8,6 @@
 
 ![https://github.com/webxos/lack/blob/main/assets/lack1.jpg](https://github.com/webxos/lack/blob/main/assets/lack1.jpg)
 
-## What's New in v3.6.4
-
-- **Real-time Graph Fully Perfected**
-  - Stronger idle pulses (increased chance + higher activity values) for a more lively feel
-  - Better timestamp handling and scaling
-  - Legend now refreshes instantly when agents are removed
-
-- **/graph Command Enhanced**
-  - Typing `/graph` now **automatically opens** the graph modal (previously only sent an ack)
-
-- **SLIME Mobile Interface Upgraded**
-  - Now includes a mini real-time graph
-  - Ralph status badge
-  - Modern dark styling and better mobile layout
-
-- **Code Quality & Maintainability**
-  - Centralized `generateSyntheticMetrics()` helper (no more duplicated code for startup vs spawn)
-  - Cleaner architecture overall
-
-### Reliability & Safety Fixes
-
-- Git commit operations are fully wrapped with error handling (research sessions will never crash due to git issues)
-- Improved agent removal flow with immediate UI updates
-- Stable status transitions and timer cleanup
-
-### Other Enhancements
-
-- Stronger visual feedback during idle periods
-- Better `/ralph` and planning mode consistency
-- Minor UX tweaks across the interface
 
 ## ✨ Features
 
