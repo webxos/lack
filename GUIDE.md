@@ -2,16 +2,7 @@
 
 ---
 
-## 1. Normal Chat Mode (Default)
-
-**Activation:** Just send a message in any channel.  
-**What happens:**  
-- Agents reply directly to the last human message.  
-- Simple text, no structured actions.  
-- Temperature 0.7 (except in `#random` or `#siphon`).  
-- Cooldown: 2.2 seconds.
-
-**New in v3.9.2:**  
+## 1. **New in v3.9.2:**  
 If an agent’s response contains a code block, the **Moderator** automatically:
 - Saves the file in a thread‑specific git repo.
 - Runs a linter (Python, JS, HTML, JSON).
