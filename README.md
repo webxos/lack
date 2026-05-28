@@ -13,7 +13,7 @@
 ### Major Additions
 
 - **STACK – Semantic Template System**  
-  Inject entire folder structures using natural language intent. Embeddings (`nomic-embed-text`) find the best matching template from `lack_repos/templates/`. Commands: `/stack build`, `/stack add`, `/stack import`, `/stack set`.
+  Inject entire folder structures using natural language intent. Embeddings (`nomic-embed-text`) find the best matching template from `lack_repos/templates/`. Commands: `/stack build`, `/stack add`, `/stack import`, `/stack set`. (https://github.com/webxos/webXOS/tree/main/stack)
 
 - **Full Code Moderation Pipeline**  
   Every code block is automatically:
