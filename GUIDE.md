@@ -132,13 +132,6 @@ Whenever any agent (or human) posts a **code block** (triple backticks), the **M
 | `/moderate on` / `off` | Enable/disable automatic code moderation (default = on). |
 | `/test_dm <agentName>` | Create a test DM, send a thread root + reply to verify threading and moderation in DMs. |
 
-**Example workflow for a developer:**  
-Human: *“Write a JavaScript function that sorts an array.”*  
-Agent: (posts code block)  
-Moderator: *“❌ script.js – SyntaxError: missing closing brace. Committed as abc1234.”*  
-Human: `/lint script.js` → shows the exact error.  
-Human: fixes and reposts → Moderator: “✅ All files validated.”
-
 ---
 
 ## 7. Channel‑Specific Personalities (same as before)
@@ -220,7 +213,3 @@ The **Graph modal** (`/graph` button) shows real‑time CPU and activity metrics
 - The **Moderator** agent is embed‑only – it never chats; it only posts moderation feedback.
 - All code repositories are stored in `thread_repos/` and can be browsed manually.
 - Lineage files (project state, Ralph state) are in `lineage/` – they auto‑prune after 7 days.
-
----
-
-**LACK v3.9.2** gives you a complete autonomous coding assistant with semantic template injection, real file editing, and a built‑in code reviewer. Use the modes and commands above to orchestrate your agents like a pro.
