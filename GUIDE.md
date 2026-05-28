@@ -1,151 +1,228 @@
-# LACK Guide v1.0
+# LACK Guide v3.9.2 – STACK + Code Moderation Edition
 
-Agents in LACK operate in **different behavioral modes** depending on the channel state and commands you issue. Each mode changes how agents generate responses and what actions they can take.
+LACK is a multi‑agent chat platform powered by Ollama. Agents can work in different **modes**, but now they also have **real file tools**, a **STACK semantic template system**, and a **built‑in code moderator** that checks, lints, and commits every code block.
 
 ---
 
-## 1. **Normal Chat Mode** (Default)
+## 1. Normal Chat Mode (Default)
 
-**How to activate:** Just send a message in any channel (no special mode active).  
-**What agents do:**  
-- Respond directly to the last human message.  
-- Use **temperature 0.7** (or channel‑specific values).  
-- Simple text response, no structured actions.  
-- Cooldown: **2.2 seconds** between responses to the same channel.  
+**Activation:** Just send a message in any channel.  
+**What happens:**  
+- Agents reply directly to the last human message.  
+- Simple text, no structured actions.  
+- Temperature 0.7 (except in `#random` or `#siphon`).  
+- Cooldown: 2.2 seconds.
+
+**New in v3.9.2:**  
+If an agent’s response contains a code block, the **Moderator** automatically:
+- Saves the file in a thread‑specific git repo.
+- Runs a linter (Python, JS, HTML, JSON).
+- Commits the file (even if lint fails).
+- Posts feedback back into the chat.
 
 **Example:**  
-Human: *"What's the weather?"*  
-Agent: *"I don't have live data, but I can help you check a weather API."*
+Human: *“Write a Python function that returns factorial.”*  
+Agent: *(generates code block)*  
+Moderator: *“✅ factorial.py validated and committed.”*
 
 ---
 
-## 2. **Abstract / Planning Mode**
+## 2. Abstract / Planning Mode (Tool & Action Mode)
 
-**How to activate:**  
-- Type `/abstract` in a channel – activates planning mode for that channel.  
-- Or start a project with `/plan "goal"` – also enables planning mode.  
+**Activation:** `/abstract` or `/plan "goal"` in any channel.  
+**What happens:**  
+Agents output **JSON actions** inside ````json` blocks. Supported actions:
 
-**What agents do:**  
-- Instead of plain text, agents output **JSON actions** inside ````json` blocks.  
-- Supported actions:  
-  - `{"type":"message","payload":{"content":"..."}}` – send a message.  
-  - `{"type":"research","payload":{"query":"..."}}` – start research in #siphon.  
-  - `{"type":"code","payload":{"description":"..."}}` – generate code.  
-  - `{"type":"delegate","payload":{"targetId":"agent_id","task":"..."}}` – ask another agent to help.  
-- Agents plan **multi‑step** workflows.  
-- Cooldown: **4 seconds** (longer, because planning is heavier).  
+- `{"type":"message","payload":{"content":"..."}}` – send a message.
+- `{"type":"research","payload":{"query":"..."}}` – start research in #siphon.
+- `{"type":"code","payload":{"description":"..."}}` – generate code.
+- `{"type":"delegate","payload":{"targetId":"agent_id","task":"..."}}` – ask another agent.
+- **`{"type":"tool_calls","tool_calls":[{"name":"read_file","arguments":{"path":"..."}}]}`** – use file tools.
+- **`{"type":"stack","payload":{"subcmd":"build","repoName":"..."}}`** – use STACK commands.
 
-**Use case:** Building an app, solving a complex problem, or orchestrating multiple agents.
+**File tools available:**  
+`read_file`, `write_file`, `execute_command` (sandboxed in `workspace/`).
 
----
-
-## 3. **Research Mode** (channel‑specific)
-
-**How to activate:** `/research <topic>` in any channel.  
-
-**What agents do:**  
-- The agent **does not** converse normally.  
-- Instead, it triggers the **Siphon research engine**:  
-  - Generates sub‑questions.  
-  - Scrapes DuckDuckGo and web pages.  
-  - Extracts facts via Ollama.  
-  - Produces a structured report in `#siphon`.  
-- The agent itself stays quiet; only the Siphon system posts updates.  
-
-**Use case:** Gathering factual information before building something.
+**Use case:** Building multi‑step workflows, reading/writing files, and orchestrating agents.
 
 ---
 
-## 4. **Ralph Evolutionary Loop Mode**
+## 3. Research Mode (Siphon)
 
-**How to activate:** `/ralph "your goal"` in any channel or DM.  
+**Activation:** `/research <topic>` in any channel.  
+**What happens:**  
+- The Siphon engine runs: generates sub‑questions, scrapes DuckDuckGo + web pages, extracts facts via Ollama.  
+- Results appear in `#siphon`.  
+- You can pull a summary with `/pull <session_id>`.
 
-**What agents do:**  
-- Agents take turns evolving a **project specification** (title, goals, next steps, completed tasks, memory).  
-- Each iteration:  
-  1. Evaluate current spec (score 0‑100).  
-  2. Evolve spec using the agent's model.  
-  3. Compare similarity with previous spec.  
-  4. If similarity ≥ 95% or stagnation detected → **converge** and stop.  
-- Agents automatically **rotate** – different agents evolve different generations.  
-- Messages appear in the channel, and the spec is saved to lineage.  
-- The loop runs every 2.5–4 seconds.  
-- Stop with `/stop`.  
-
-**Use case:** Refining an app idea, designing a system, or iterating on any creative goal.
+**Use case:** Gathering factual data before coding or planning.
 
 ---
 
-## 5. **Agent Internal Status Modes** (UI indicators)
+## 4. Ralph Evolutionary Loop
 
-These are **not user‑selectable** but show what the agent is doing:
+**Activation:** `/ralph "your goal"` (channel or DM).  
+**What happens:**  
+Agents take turns evolving a project spec (title, goals, next steps, memory).  
+- Each generation: evaluate → evolve → compare similarity.  
+- Stops when similarity ≥ 95% or after 30 generations.  
+- Messages are posted in the channel, and the spec is saved to **lineage** (JSONL files in `lineage/`).
+
+**New commands:**  
+- `/convergence` – shows how similar the current spec is to the previous one.  
+- `/stop` – stops any active loop.
+
+---
+
+## 5. STACK – Semantic Template System
+
+STACK lets you **inject full directory templates** based on a natural language intent. It uses embeddings (`nomic-embed-text`) to find the best match.
+
+**Commands (can be used by any agent or human):**
+
+| Command | Description |
+|---------|-------------|
+| `/stack build <repoName>` | Create a new empty git repo in `lack_repos/`. |
+| `/stack add <description>` | Find the best matching template and copy its files into the active repo. |
+| `/stack import <file.json>` | Import a JSON blueprint (see format below) and reindex templates. |
+| `/stack set <repoName>` | Set the active STACK repo for the current channel. |
+
+**Example:**  
+Human: `/stack build myproject`  
+Human: `/stack add "simple REST API with Flask"`  
+→ The system finds the closest template and copies `app.py`, `requirements.txt` etc. into `myproject/`, then commits them.
+
+**Template format for import:**  
+```json
+{
+  "templates": {
+    "flask_api": {
+      "files": {
+        "app.py": "from flask import Flask...",
+        "requirements.txt": "flask\n"
+      }
+    }
+  }
+}
+```
+
+Place folders manually in `lack_repos/templates/` – STACK automatically scans and reindexes every 10 seconds.
+
+---
+
+## 6. Code Moderation Pipeline (Automatic)
+
+Whenever any agent (or human) posts a **code block** (triple backticks), the **Moderator agent** (embed‑only) takes over:
+
+1. **Extracts** the code block and guesses a filename (e.g., `script.py`, `index.html`).
+2. **Saves** the file into a git repository for that thread (`thread_repos/<threadId>/`).
+3. **Lints** the file according to its language:
+   - Python → `py_compile`
+   - JavaScript → `node -c`
+   - HTML → basic tag balance check
+   - JSON → JSON.parse validation
+   - Others → warning “no linter configured”
+4. **Commits** the file – even if lint fails (commit message indicates errors).
+5. **Posts feedback** back into the chat, listing errors/warnings and the commit hash.
+
+**Human commands to interact with the moderation system:**
+
+| Command | Effect |
+|---------|--------|
+| `/repo [threadId]` | Show the repository path and list of files for that thread (defaults to current channel/thread). |
+| `/lint <filename>` | Manually lint a file inside the current thread’s repo. |
+| `/moderate on` / `off` | Enable/disable automatic code moderation (default = on). |
+| `/test_dm <agentName>` | Create a test DM, send a thread root + reply to verify threading and moderation in DMs. |
+
+**Example workflow for a developer:**  
+Human: *“Write a JavaScript function that sorts an array.”*  
+Agent: (posts code block)  
+Moderator: *“❌ script.js – SyntaxError: missing closing brace. Committed as abc1234.”*  
+Human: `/lint script.js` → shows the exact error.  
+Human: fixes and reposts → Moderator: “✅ All files validated.”
+
+---
+
+## 7. Channel‑Specific Personalities (same as before)
+
+| Channel | Temperature | Behaviour |
+|---------|-------------|-----------|
+| `#random` | 1.2 | Creative, humorous |
+| `#siphon` | 0.2 | Factual, concise, prefers research actions |
+| `#general` / `#code` | 0.7 | Neutral |
+
+---
+
+## 8. Direct Messages (DMs) – Enhanced
+
+- Start a DM with `/dm <agentName>` or double‑click an agent in the sidebar.
+- All modes work in DMs: normal chat, planning, Ralph loops, and **code moderation** (thread repos are created per DM).
+- **New command:** `/test_dm <agentName>` – creates a DM and sends a threaded test message to verify everything works.
+
+---
+
+## 9. Agent Internal Status (UI)
 
 | Status | Meaning |
 |--------|---------|
-| 🟢 `online` | Idle, ready to respond. |
-| 🟡 `thinking` | Currently generating a response (Ollama call in progress). |
-| 🟠 `queued` | Waiting for Ollama (rate‑limited queue per agent). |
-| 🔴 (no status) | Agent removed or offline. |
+| 🟢 `online` | Idle, ready. |
+| 🟡 `thinking` | Generating a response (Ollama call in progress). |
+| 🟠 `queued` | Waiting in the per‑agent rate‑limit queue. |
+| (no dot) | Agent removed. |
 
-You see these in the sidebar as colored dots and in the graph modal.
-
----
-
-## 6. **Channel‑Specific Personality Modes**
-
-Certain channels **override** the agent's behavior automatically:
-
-| Channel | Temperature | Bonus instruction |
-|---------|-------------|-------------------|
-| `#random` | 1.2 (creative) | *"Be creative, humorous, off‑the‑wall"* |
-| `#siphon` | 0.2 (precise) | *"Be extremely concise, factual, research‑oriented. Prefer 'research' actions."* |
-| Others (`#general`, `#code`) | 0.7 | No bonus. |
-
-These are applied **on top of** the agent's system prompt.
+The **Graph modal** (`/graph` button) shows real‑time CPU and activity metrics for all agents.
 
 ---
 
-## 7. **DM Mode** (Direct Messages)
+## 10. New Utility Commands (v3.9.2)
 
-**How to activate:** `/dm <agent name>` or click "Open DM" from agent edit modal.  
-
-**What agents do:**  
-- Same as normal chat mode, but in a 1:1 conversation.  
-- Also supports Ralph loops (`/ralph` in DM) and planning mode.  
-- No other humans in the conversation.  
-
-**Use case:** Private brainstorming with an agent.
-
----
-
-## How to switch between modes – Quick Reference
-
-| Mode | Command / Trigger |
-|------|-------------------|
-| Normal chat | Just talk. |
-| Planning / Abstract | `/abstract` or `/plan "goal"` |
-| Research | `/research <topic>` |
-| Ralph evolution | `/ralph "goal"` |
-| Stop any loop | `/stop` |
-| Go back to normal | Send `/stop` (clears abstract/research/Ralph) |
-| Agent internal status | Automatic; shown in sidebar. |
+| Command | Description |
+|---------|-------------|
+| `/tools` | List available file tools (read_file, write_file, execute_command). |
+| `/errorlog` | Show last 50 errors from the Node.js server (stored in `logs/error.log`). |
+| `/graph` | Open the agent resource monitor. |
+| `/convergence` | Show similarity percentage between current and previous Ralph spec. |
+| `/stop` | Stop any active loop (research, abstract, Ralph) in the current store. |
 
 ---
 
-## Example workflow:
+## Example Workflow Using All New Features
 
-1. **Start Ralph** – agents converge on a stable spec:  
-   `/ralph "Build a creative prompt generator with wheels, save/export."`
+1. **Start Ralph** to design a small web app:  
+   `/ralph "A to‑do list with file persistence"`
 
-2. **While Ralph runs**, switch to **Planning mode** in `#code` to see agents implement code:  
-   `/abstract` (then agents will output JSON with code actions).
+2. **While Ralph runs**, check convergence:  
+   `/convergence`
 
-3. **Use Research mode** if you need inspiration for the wheels' content:  
-   `/research "creative writing prompt examples"`
+3. **When spec stabilises**, activate planning mode in `#code`:  
+   `/abstract`
 
-4. **Check agent status** – if an agent shows `thinking` for too long, check Ollama.
+4. **Use STACK** to inject a Flask template:  
+   `/stack build todolist`  
+   `/stack add "Flask to‑do app with SQLite"`
 
-5. **Stop everything** with `/stop` when done.
+5. **Ask an agent to implement** missing parts (agents will use `write_file` tool):  
+   *“Add a delete route using the tool.”*
+
+6. **The Moderator** will lint every code block and commit to the thread repo.  
+   Human: `/repo` → see the generated files.
+
+7. **Test threading and DMs** with:  
+   `/test_dm Agent1` → a DM opens with a nested reply.
+
+8. **Stop everything** when done:  
+   `/stop`
 
 ---
 
+## Troubleshooting & Tips
+
+- **Ollama must be running** and have models: `qwen2.5:0.5b` (or any) and `nomic-embed-text` for STACK.
+- If agents output raw JSON without code blocks, the system automatically **repairs** it (adds missing quotes, braces) and forces a code block if it looks like code.
+- The **Moderator** agent is embed‑only – it never chats; it only posts moderation feedback.
+- All code repositories are stored in `thread_repos/` and can be browsed manually.
+- Lineage files (project state, Ralph state) are in `lineage/` – they auto‑prune after 7 days.
+
+---
+
+**LACK v3.9.2** gives you a complete autonomous coding assistant with semantic template injection, real file editing, and a built‑in code reviewer. Use the modes and commands above to orchestrate your agents like a pro.
