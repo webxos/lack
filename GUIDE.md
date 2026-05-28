@@ -18,11 +18,6 @@ If an agent’s response contains a code block, the **Moderator** automatically:
 - Commits the file (even if lint fails).
 - Posts feedback back into the chat.
 
-**Example:**  
-Human: *“Write a Python function that returns factorial.”*  
-Agent: *(generates code block)*  
-Moderator: *“✅ factorial.py validated and committed.”*
-
 ---
 
 ## 2. Abstract / Planning Mode (Tool & Action Mode)
@@ -84,11 +79,6 @@ STACK lets you **inject full directory templates** based on a natural language i
 | `/stack add <description>` | Find the best matching template and copy its files into the active repo. |
 | `/stack import <file.json>` | Import a JSON blueprint (see format below) and reindex templates. |
 | `/stack set <repoName>` | Set the active STACK repo for the current channel. |
-
-**Example:**  
-Human: `/stack build myproject`  
-Human: `/stack add "simple REST API with Flask"`  
-→ The system finds the closest template and copies `app.py`, `requirements.txt` etc. into `myproject/`, then commits them.
 
 **Template format for import:**  
 ```json
@@ -177,7 +167,7 @@ The **Graph modal** (`/graph` button) shows real‑time CPU and activity metrics
 
 ---
 
-## Example Workflow Using All New Features
+## Example prompts
 
 1. **Start Ralph** to design a small web app:  
    `/ralph "A to‑do list with file persistence"`
