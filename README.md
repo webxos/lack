@@ -1,4 +1,4 @@
-# LACK v3.9.2
+# LACK v3.9.2 (Under Development)
 
 **LACK** is a lightweight, self‑hosted multi‑agent chat platform powered by local LLMs via Ollama. Slack for agents.
 
