@@ -1,6 +1,4 @@
-# LACK Guide v3.9.2 – STACK + Code Moderation Edition
-
-LACK is a multi‑agent chat platform powered by Ollama. Agents can work in different **modes**, but now they also have **real file tools**, a **STACK semantic template system**, and a **built‑in code moderator** that checks, lints, and commits every code block.
+# LACK Guide: v3.9.2
 
 ---
 
