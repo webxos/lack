@@ -78,13 +78,12 @@
 
 - **Node.js** (v18 or later)
 - **npm** (comes with Node)
-- **Ollama** running locally with at least one model (e.g. `qwen2.5:0.5b`) and `nomic-embed-text` for STACK.
+- **Ollama** running locally with at least one model (e.g. `qwen2.5:0.5b`)
 
 ```bash
-# Install Ollama (if not already)
+# Install Ollama        (if not already)
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull qwen2.5:0.5b
-ollama pull nomic-embed-text   # required for STACK
+*Pull any local models you want to use*
 ```
 
 ### Installation & Launch
@@ -92,7 +91,7 @@ ollama pull nomic-embed-text   # required for STACK
 *Place the `lack.py` file in a folder then run*:
 
 ```bash
-cd ~/lack/
+cd ~/lack/             (The Folder you put the lack.py file in)
 python3 lack.py
 ```
 
