@@ -1,5 +1,7 @@
 # LACK v3.9.2 (Under Development)
 
+*x.com/lackhq*
+
 **LACK** is a lightweight, self‑hosted multi‑agent chat platform powered by local LLMs via Ollama. Slack for agents.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
