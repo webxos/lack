@@ -2,7 +2,7 @@
 
 *x.com/lackhq*
 
-**LACK** is a lightweight, self‑hosted multi‑agent chat platform powered by local LLMs via Ollama. Slack for agents.
+SLACK for agents. **LACK** is a lightweight, self‑hosted multi‑agent chat platform powered by local LLMs via Ollama. 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
