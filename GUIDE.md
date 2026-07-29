@@ -333,3 +333,134 @@ The **Graph modal** (`/graph` button) shows real‑time CPU, memory, TPS, and J�
 - **J‑space** requires embeddings – if `nomic-embed-text` is not available, J‑space will be disabled (fallback to TF‑IDF).
 - **Public memory** is disabled by default – enable with `/toggle_public_memory` or via config.
 - **Search providers** – if SerpAPI or Firecrawl fail, the system automatically falls back to DuckDuckGo.
+
+## Prompt Ideas
+
+LACK v4.2.2 – 20 Robust Feature-Test Prompts
+================================================
+Designed to stress-test specific LACK capabilities:
+- Musing (low-commitment sampling + candidate scoring + synthesis)
+- Triangulation (multi-perspective + reconciliation)
+- CI/CD pipeline + Moderator review + auto-fix
+- Reconciliation loop + convergence / stagnation handling
+- J-space (silent concept projection)
+- DecentMem (e-pool / x-pool, judgeAndReweight, proactive X generation)
+- STACK (template matching + git commits)
+- Graph / metrics / loop_health
+- Tool restrictions (only Moderator can execute_command)
+- Channel personality rules (#code, #siphon, #general)
+- Ralph evolution + force mutation
+- Reflection format ("things worth a closer look")
+
+Copy-paste the commands into the matching channel.
+
+------------------------------------------------
+1. /abstract – Musing + reflection pressure
+------------------------------------------------
+/abstract Design a minimal, production-ready Python multi-agent orchestration skeleton optimized for small Ollama models (0.5B–3B). Requirements: src/ package layout (agents, tools, core, memory, utils), single entrypoint, typed config, defensive error handling, structured logging, zero external heavy deps beyond requests/sqlite. Force the use of musing (generate 3 candidate architectures, score them, synthesize the best). End with the required reflection format and 3 concrete next investigation candidates. Write every file with tools, lint, and commit iteratively.
+
+------------------------------------------------
+2. /abstract – Code channel purity + Moderator CI/CD
+------------------------------------------------
+/abstract (in #code) Produce a complete, self-contained FastAPI + SQLite microservice for a personal knowledge base with semantic search stubs. Output ONLY clean code blocks. No explanations. Include Dockerfile, requirements.txt, and a basic test suite. Trigger full Moderator CI/CD (lint, peer review, auto-fix loop, git commit to thread repo).
+
+------------------------------------------------
+3. /plan – Project planning + DecentMem reuse
+------------------------------------------------
+/plan Build a private personal finance tracker (income, expenses, budgets, monthly PDF reports, CSV import). Break into 4 sprints. Explicitly retrieve and reuse any high-scoring trajectories from agent private memory (e-pool) that relate to SQLite schemas or report generation. After planning, start a short Ralph loop to refine the schema.
+
+------------------------------------------------
+4. /ralph – Full evolution + force mutation test
+------------------------------------------------
+/ralph Evolve a minimal Python roguelike engine (entity-component system, procedural map, save/load, terminal renderer). Goal: converge to a clean, documented, runnable demo. Force stagnation detection and mutation if similarity stays high for 3 generations. Track loop_health and J-space coherence.
+
+------------------------------------------------
+5. /abstract – Triangulation under conflicting constraints
+------------------------------------------------
+/abstract Design a rate-limited, cached weather microservice (API gateway pattern). Use triangulation across 3 perspectives: technical feasibility, cost/performance, and security. Reconcile the views into one coherent architecture + ASCII diagram + skeleton code. Explicitly surface any trade-offs that remain unresolved.
+
+------------------------------------------------
+6. /plan + /reconcile – Reconciliation loop stress
+------------------------------------------------
+/plan Create a roadmap for migrating a small monolith to microservices on Kubernetes with chaos-engineering practices. Then immediately run /reconcile with the goal "production-ready migration plan with measurable success criteria". Require eval score ≥ 85 and test-pass before declaring convergence. Enable HITL pause if configured.
+
+------------------------------------------------
+7. /siphon – Research → STACK → code
+------------------------------------------------
+/siphon Research the architecture and key design patterns of the FastAPI framework (https://github.com/tiangolo/fastapi). Extract reusable templates. Then use /stack add "minimal FastAPI service with dependency injection and async endpoints" and apply the best match. Finally generate a complete working service from the applied template.
+
+------------------------------------------------
+8. /abstract – J-space guided design
+------------------------------------------------
+/abstract Using current J-space signals (especially any strong "planning", "safety", or "causal" concepts), design a lightweight local RAG pipeline that stays under 512-token context windows for 0.5B models. Prefer pure Python + nomic embeddings + SQLite. Document how J-space influenced the design choices.
+
+------------------------------------------------
+9. /plan – DecentMem X-pool exploration
+------------------------------------------------
+/plan Design a CLI habit + task tracker with streaks, rich formatting, and daily digests. Force generation of 3 novel X-pool candidates (exploration strategies) before settling on the final architecture. Score each candidate and keep the highest-scoring one in e-pool.
+
+------------------------------------------------
+10. /abstract – Tool restriction enforcement
+------------------------------------------------
+/abstract Build a safe file-organizer utility. When any agent needs to run shell commands (mkdir, mv, etc.), it must request the Moderator instead of calling execute_command directly. Demonstrate the restriction path and the Moderator’s response. Include dry-run and undo features.
+
+------------------------------------------------
+11. /ralph – Multi-agent hand-off + metrics
+------------------------------------------------
+/ralph Build a lightweight multi-agent orchestration framework (researcher, coder, critic) with shared memory and task delegation. Rotate agents every generation. Continuously publish CPU / TPS / J-space coherence to the graph. Stop only when recurrence conditions (sim ≥ 0.95, eval ≥ 80, test pass) are met.
+
+------------------------------------------------
+12. /abstract – Channel personality isolation
+------------------------------------------------
+/abstract (switch to #siphon first) Research current best practices for local RAG systems in 2026, then move to #code and emit only the resulting Python implementation. Verify that #siphon stays factual/research-focused and #code stays pure code with no chat.
+
+------------------------------------------------
+13. /plan – STACK template creation + reuse
+------------------------------------------------
+/plan Create a reusable STACK template for "minimal Ollama-powered CLI agent with tool calling and memory". Save it under lack_repos/templates/. Then start a new project that uses /stack add "ollama CLI agent" and verify the files land correctly with a git commit.
+
+------------------------------------------------
+14. /abstract – Full CI/CD + reverse-skill path
+------------------------------------------------
+/abstract Write a non-trivial Python module that needs reverse-engineering insight (e.g., a small bytecode or obfuscated helper). Trigger Moderator review, lint, peer review, auto-fix, and (if reverse-skill is present) the reverse-skill analysis. Commit the final cleaned version to the thread repo.
+
+------------------------------------------------
+15. /reconcile – Long-running convergence test
+------------------------------------------------
+/reconcile Goal: "Complete, documented, production-ready local knowledge-base service with semantic search, tagging, and daily digest". Allow up to 20 iterations. Require minEvalScore 85, convergenceThreshold 0.95, and explicit test-pass. Log every iteration to loop_health.
+
+------------------------------------------------
+16. /abstract – Musing diversity + synthesis quality
+------------------------------------------------
+/abstract Generate a 3D endless-runner concept in Three.js (procedural track, jump/slide, score, restart). Force museCount=4 with deliberately varied temperature and suffix prompts. Score the four candidates, synthesize the strongest elements, then emit the final complete HTML/CSS/JS file. Reflection must list which candidate contributed which idea.
+
+------------------------------------------------
+17. /plan – Graph & spike awareness
+------------------------------------------------
+/plan Design a real-time agent metrics dashboard (CPU, memory, TPS, J-space coherence, e/x-pool sizes). Include spike detection thresholds and a simple alerting rule. After planning, run a short Ralph loop while watching the graph for any CPU or TPS spikes caused by the planning itself.
+
+------------------------------------------------
+18. /siphon + /abstract – Research-to-code pipeline
+------------------------------------------------
+/siphon Analyze the plugin / event-bus architecture of Home Assistant (https://github.com/home-assistant/core). Summarize the key patterns. Then /abstract Use the research to implement a minimal pure-Python event bus + plugin loader that small Ollama agents can extend. Keep it under 300 LOC and fully typed.
+
+------------------------------------------------
+19. /ralph – Stagnation → forced mutation → recovery
+------------------------------------------------
+/ralph Evolve a static-site + blog generator (Markdown, templates, RSS, SEO). Intentionally keep early generations very similar to trigger the 3-round stagnation detector. Confirm that force mutation fires, X-pool candidates are generated, and the loop recovers with a meaningfully different design.
+
+------------------------------------------------
+20. /abstract – End-to-end feature cocktail
+------------------------------------------------
+/abstract Build a clean, minimal, git-ready Python repository for a modular multi-agent system that uses: DecentMem (private e/x pools), J-space hints, optional musing on hard decisions, tool calling (with Moderator restriction), and a simple reconciliation loop for project state. Create the full directory tree, write every file, lint, commit, and finish with the standard reflection + "things worth a closer look" section. This is the integration test for the entire LACK feature set.
+
+================================================
+Usage notes
+================================================
+- Prefer #general for /plan, /ralph, /reconcile, /abstract that need chat + reflection.
+- Use #code when you want pure code blocks and full Moderator CI/CD.
+- Use #siphon for research-heavy prompts; follow with /pull <session-id>.
+- After any Ralph or Reconciliation run, check /convergence and the GRAPH button.
+- Toggle Moderator with the UI button or /moderate on|off.
+- Watch agent_memories/ and loop_health table for DecentMem and reconciliation telemetry.
+
