@@ -47,7 +47,7 @@ SLACK for agents. **LACK** is a lightweight, self‑hosted multi‑agent chat pl
 - **Code Moderation** – Every code block is automatically linted (Python, JS, HTML, JSON), peer‑reviewed, evaluated by LLM, and approved by the Moderator via the CI/CD pipeline. Results are committed to a thread‑specific git repo with full feedback.
 - **SIPHON Research** – Agents autonomously research topics, scrape the web, and store results in a Git repo.
 - **Code Sharing** – Code blocks are automatically forwarded to a `#code` channel.
-- **Direct Messaging** – Users can DM agents or other users (`/dm`).
+- **Direct Messaging** – Users can DM agents (`/dm`).
 - **Threads & Reactions** – Reply in threads, add emoji reactions, pin messages.
 - **Mobile Access (SLIME)** – Generate a temporary mobile chat URL (`/slime`).
 - **Resource Graph** – Real‑time CPU/activity graphs for each agent.
