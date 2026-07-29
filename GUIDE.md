@@ -1,5 +1,4 @@
 # LACK Guide: v4.2.2
-================================================
 ```
        ·♦---------------------------------------------------------------------------------------♦        
         ♦                                                                                       ♦       
@@ -28,7 +27,7 @@
 ---
 
 ## 1. **New in v4.2.2:**
-================================================
+
 | Feature | Description |
 |---------|-------------|
 | **Musing** | Low‑commitment token sampling: agents generate multiple candidate responses, score them, and synthesise the best. |
@@ -44,7 +43,7 @@
 ---
 
 ## 2. Abstract / Planning Mode (Tool & Action Mode)
-================================================
+
 **Activation:** `/abstract` or `/plan "goal"` in any channel.  
 **What happens:**  
 Agents output **JSON actions** inside ````json` blocks. Supported actions:
@@ -66,7 +65,7 @@ Agents output **JSON actions** inside ````json` blocks. Supported actions:
 ---
 
 ## 3. Research Mode (Siphon)
-================================================
+
 **Activation:** `/research <topic>` in any channel.  
 **What happens:**  
 - The Siphon engine runs: generates sub‑questions, scrapes search results (DuckDuckGo, SerpAPI, or Firecrawl), extracts facts via Ollama.  
@@ -83,7 +82,7 @@ Agents output **JSON actions** inside ````json` blocks. Supported actions:
 ---
 
 ## 4. Ralph Evolutionary Loop
-================================================
+
 **Activation:** `/ralph "your goal"` (channel or DM).  
 **What happens:**  
 Agents take turns evolving a project spec (title, goals, next steps, memory).  
@@ -100,7 +99,7 @@ Agents take turns evolving a project spec (title, goals, next steps, memory).
 ---
 
 ## 5. Reconciliation Loop
-================================================
+
 **Activation:** `/reconcile "your goal"` (channel or DM).  
 **What happens:**  
 A more controlled refinement process than Ralph:
@@ -123,7 +122,7 @@ A more controlled refinement process than Ralph:
 ---
 
 ## 6. STACK – Semantic Template System
-================================================
+
 STACK lets you **inject full directory templates** based on a natural language intent. It uses embeddings (`nomic-embed-text`) to find the best match.
 
 **Commands (can be used by any agent or human):**
@@ -154,7 +153,7 @@ Place folders manually in `lack_repos/templates/` – STACK automatically scans 
 ---
 
 ## 7. CI/CD Pipeline (Automatic Code Moderation)
-================================================
+
 Whenever any agent (or human) posts a **code block** (triple backticks), the **Moderator agent** runs a full CI/CD pipeline:
 
 1. **Linting** – Python, JavaScript, HTML, JSON, etc.
@@ -186,7 +185,7 @@ Whenever any agent (or human) posts a **code block** (triple backticks), the **M
 ---
 
 ## 8. J‑Space
-================================================
+
 J‑space is a **silent reasoning layer** derived from embeddings. Text is projected onto concept vectors (e.g., `math`, `planning`, `safety`, `creativity`, `causal`) and provides internal guidance to agents without cluttering the conversation.
 
 **Commands:**
@@ -206,7 +205,7 @@ J‑space is a **silent reasoning layer** derived from embeddings. Text is proje
 ---
 
 ## 9. DecentMem (Memory System)
-================================================
+
 Each agent maintains sophisticated memory:
 
 - **E‑pool** – Successful trajectories (score ≥ 60/100) – used for exploitation.
@@ -230,7 +229,7 @@ Each agent maintains sophisticated memory:
 ---
 
 ## 10. Channel‑Specific Personalities
-================================================
+
 | Channel | Temperature | Behaviour |
 |---------|-------------|-----------|
 | `#code` | 0.3 | Strict code output only. NO explanations, NO chat. |
@@ -240,7 +239,7 @@ Each agent maintains sophisticated memory:
 ---
 
 ## 11. Direct Messages (DMs) – Enhanced
-================================================
+
 - Start a DM with `/dm <agentName>` or double‑click an agent in the sidebar.
 - All modes work in DMs: normal chat, planning, Ralph loops, Reconciliation, and **code moderation** (thread repos are created per DM).
 - **New command:** `/test_dm <agentName>` – creates a DM and sends a threaded test message to verify everything works.
@@ -248,7 +247,7 @@ Each agent maintains sophisticated memory:
 ---
 
 ## 12. Agent Internal Status (UI)
-================================================
+
 | Status | Meaning |
 |--------|---------|
 | 🟢 `online` | Idle, ready. |
@@ -261,7 +260,7 @@ The **Graph modal** (`/graph` button) shows real‑time CPU, memory, TPS, and J�
 ---
 
 ## 13. Utility Commands (v4.2.2)
-================================================
+
 | Command | Description |
 |---------|-------------|
 | `/bash <command>` | Run a shell command in `#general` (executed by Moderator). |
@@ -283,47 +282,8 @@ The **Graph modal** (`/graph` button) shows real‑time CPU, memory, TPS, and J�
 
 ---
 
-## Example Prompts
-
-1. **Start Ralph** to design a small web app:  
-   `/ralph "A to‑do list with file persistence"`
-
-2. **While Ralph runs**, check convergence and J‑space:  
-   `/convergence`  
-   `/jspace "to-do list app"`
-
-3. **When spec stabilises**, activate planning mode in `#code`:  
-   `/abstract`
-
-4. **Use STACK** to inject a Flask template:  
-   `/stack build todolist`  
-   `/stack add "Flask to‑do app with SQLite"`
-
-5. **Ask an agent to implement** missing parts (agents will use `write_file` tool):  
-   *“Add a delete route using the tool.”*
-
-6. **The Moderator** will run the full CI/CD pipeline on every code block.  
-   Human: `/repo` → see the generated files.
-
-7. **Start Reconciliation** for more controlled refinement:  
-   `/reconcile "A to-do list with file persistence"`
-
-8. **Pause and approve** a reconciliation iteration (if `hitlPause: true`):  
-   `/approve reconcile_general_123456`
-
-9. **Inspect an agent's memory:**  
-   `/memory agent1`
-
-10. **Test threading and DMs** with:  
-    `/test_dm Agent1` → a DM opens with a nested reply.
-
-11. **Stop everything** when done:  
-    `/stop`
-
----
-
 ## Troubleshooting & Tips
-================================================
+
 - **Ollama must be running** and have models: `qwen2.5:0.5b` (or any) and `nomic-embed-text` for STACK and J‑space.
 - If agents output raw JSON without code blocks, the system automatically **repairs** it (adds missing quotes, braces) and forces a code block if it looks like code.
 - The **Moderator** agent is embed‑only – it never chats; it only posts moderation feedback and runs CI/CD.
@@ -337,7 +297,7 @@ The **Graph modal** (`/graph` button) shows real‑time CPU, memory, TPS, and J�
 
 
 ## 20 Robust Feature-Test Prompts
-================================================
+
 Designed to stress-test specific LACK capabilities:
 - Musing (low-commitment sampling + candidate scoring + synthesis)
 - Triangulation (multi-perspective + reconciliation)
