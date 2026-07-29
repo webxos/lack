@@ -1,5 +1,5 @@
 # LACK Guide: v4.2.2
-
+================================================
 ```
        ·♦---------------------------------------------------------------------------------------♦        
         ♦                                                                                       ♦       
@@ -28,7 +28,7 @@
 ---
 
 ## 1. **New in v4.2.2:**
-
+================================================
 | Feature | Description |
 |---------|-------------|
 | **Musing** | Low‑commitment token sampling: agents generate multiple candidate responses, score them, and synthesise the best. |
@@ -44,7 +44,7 @@
 ---
 
 ## 2. Abstract / Planning Mode (Tool & Action Mode)
-
+================================================
 **Activation:** `/abstract` or `/plan "goal"` in any channel.  
 **What happens:**  
 Agents output **JSON actions** inside ````json` blocks. Supported actions:
@@ -66,7 +66,7 @@ Agents output **JSON actions** inside ````json` blocks. Supported actions:
 ---
 
 ## 3. Research Mode (Siphon)
-
+================================================
 **Activation:** `/research <topic>` in any channel.  
 **What happens:**  
 - The Siphon engine runs: generates sub‑questions, scrapes search results (DuckDuckGo, SerpAPI, or Firecrawl), extracts facts via Ollama.  
@@ -83,7 +83,7 @@ Agents output **JSON actions** inside ````json` blocks. Supported actions:
 ---
 
 ## 4. Ralph Evolutionary Loop
-
+================================================
 **Activation:** `/ralph "your goal"` (channel or DM).  
 **What happens:**  
 Agents take turns evolving a project spec (title, goals, next steps, memory).  
@@ -100,7 +100,7 @@ Agents take turns evolving a project spec (title, goals, next steps, memory).
 ---
 
 ## 5. Reconciliation Loop
-
+================================================
 **Activation:** `/reconcile "your goal"` (channel or DM).  
 **What happens:**  
 A more controlled refinement process than Ralph:
@@ -123,7 +123,7 @@ A more controlled refinement process than Ralph:
 ---
 
 ## 6. STACK – Semantic Template System
-
+================================================
 STACK lets you **inject full directory templates** based on a natural language intent. It uses embeddings (`nomic-embed-text`) to find the best match.
 
 **Commands (can be used by any agent or human):**
@@ -154,7 +154,7 @@ Place folders manually in `lack_repos/templates/` – STACK automatically scans 
 ---
 
 ## 7. CI/CD Pipeline (Automatic Code Moderation)
-
+================================================
 Whenever any agent (or human) posts a **code block** (triple backticks), the **Moderator agent** runs a full CI/CD pipeline:
 
 1. **Linting** – Python, JavaScript, HTML, JSON, etc.
@@ -186,7 +186,7 @@ Whenever any agent (or human) posts a **code block** (triple backticks), the **M
 ---
 
 ## 8. J‑Space
-
+================================================
 J‑space is a **silent reasoning layer** derived from embeddings. Text is projected onto concept vectors (e.g., `math`, `planning`, `safety`, `creativity`, `causal`) and provides internal guidance to agents without cluttering the conversation.
 
 **Commands:**
@@ -206,7 +206,7 @@ J‑space is a **silent reasoning layer** derived from embeddings. Text is proje
 ---
 
 ## 9. DecentMem (Memory System)
-
+================================================
 Each agent maintains sophisticated memory:
 
 - **E‑pool** – Successful trajectories (score ≥ 60/100) – used for exploitation.
@@ -230,7 +230,7 @@ Each agent maintains sophisticated memory:
 ---
 
 ## 10. Channel‑Specific Personalities
-
+================================================
 | Channel | Temperature | Behaviour |
 |---------|-------------|-----------|
 | `#code` | 0.3 | Strict code output only. NO explanations, NO chat. |
@@ -240,7 +240,7 @@ Each agent maintains sophisticated memory:
 ---
 
 ## 11. Direct Messages (DMs) – Enhanced
-
+================================================
 - Start a DM with `/dm <agentName>` or double‑click an agent in the sidebar.
 - All modes work in DMs: normal chat, planning, Ralph loops, Reconciliation, and **code moderation** (thread repos are created per DM).
 - **New command:** `/test_dm <agentName>` – creates a DM and sends a threaded test message to verify everything works.
@@ -248,7 +248,7 @@ Each agent maintains sophisticated memory:
 ---
 
 ## 12. Agent Internal Status (UI)
-
+================================================
 | Status | Meaning |
 |--------|---------|
 | 🟢 `online` | Idle, ready. |
@@ -261,7 +261,7 @@ The **Graph modal** (`/graph` button) shows real‑time CPU, memory, TPS, and J�
 ---
 
 ## 13. Utility Commands (v4.2.2)
-
+================================================
 | Command | Description |
 |---------|-------------|
 | `/bash <command>` | Run a shell command in `#general` (executed by Moderator). |
@@ -323,7 +323,7 @@ The **Graph modal** (`/graph` button) shows real‑time CPU, memory, TPS, and J�
 ---
 
 ## Troubleshooting & Tips
-
+================================================
 - **Ollama must be running** and have models: `qwen2.5:0.5b` (or any) and `nomic-embed-text` for STACK and J‑space.
 - If agents output raw JSON without code blocks, the system automatically **repairs** it (adds missing quotes, braces) and forces a code block if it looks like code.
 - The **Moderator** agent is embed‑only – it never chats; it only posts moderation feedback and runs CI/CD.
@@ -334,9 +334,9 @@ The **Graph modal** (`/graph` button) shows real‑time CPU, memory, TPS, and J�
 - **Public memory** is disabled by default – enable with `/toggle_public_memory` or via config.
 - **Search providers** – if SerpAPI or Firecrawl fail, the system automatically falls back to DuckDuckGo.
 
-## Prompt Ideas
 
-LACK v4.2.2 – 20 Robust Feature-Test Prompts
+
+## 20 Robust Feature-Test Prompts
 ================================================
 Designed to stress-test specific LACK capabilities:
 - Musing (low-commitment sampling + candidate scoring + synthesis)
@@ -454,9 +454,8 @@ Copy-paste the commands into the matching channel.
 ------------------------------------------------
 /abstract Build a clean, minimal, git-ready Python repository for a modular multi-agent system that uses: DecentMem (private e/x pools), J-space hints, optional musing on hard decisions, tool calling (with Moderator restriction), and a simple reconciliation loop for project state. Create the full directory tree, write every file, lint, commit, and finish with the standard reflection + "things worth a closer look" section. This is the integration test for the entire LACK feature set.
 
-================================================
-Usage notes
-================================================
+### Notes
+
 - Prefer #general for /plan, /ralph, /reconcile, /abstract that need chat + reflection.
 - Use #code when you want pure code blocks and full Moderator CI/CD.
 - Use #siphon for research-heavy prompts; follow with /pull <session-id>.
