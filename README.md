@@ -307,4 +307,4 @@ lack/
 
 ## 📜 License
 
-MIT
+webXOS 2026 © MIT Open Sourced for Testing and Development
